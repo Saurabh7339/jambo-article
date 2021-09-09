@@ -9,13 +9,17 @@ def articles_list(request):
 	articles  = Articles.objects.all().order_by('date')
 	return render(request ,'articles/articles_list.html',{'articles':articles})
 
+def remove(string):
+    return string.replace(" ", "")
 
 def update_article(request,slug):
 	article = Articles.objects.get(slug=slug)
 	if request.method =='POST':
 		article.title  = request.POST.get('title')
 		article.body = request.POST.get('body')
-		article.slug = request.POST.get('slug')
+		store_slug=request.POST.get('slug')
+		store= remove(store_slug)
+		article.slug = store
 		article.save()
 		return redirect('articles:articles')
 			
@@ -42,11 +46,13 @@ def article_detail(request,slug):
 @login_required(login_url="/accounts/login/")
 def article_create(request):
 	if request.method=='POST':
-		form = forms.CreateArticle(request.POST,request.FILES)
-		if form.is_valid():
-			instance = form.save(commit=False)
-			instance.author = request.user
-			instance.save()
-			return redirect('articles:articles')
-	form = forms.CreateArticle()
-	return render(request,'articles/article_create.html',{'form':form})
+		store_slug=request.POST.get('slug')
+		store= remove(store_slug)
+		title=request.POST.get('title')
+		body=request.POST.get('body')
+		thumb=request.POST.get('thumb')
+		instance= Articles(title=title,body=body,slug=store,thumb=thumb)
+		instance.author = request.user
+		instance.save()
+		return redirect('articles:articles')
+	return render(request,'articles/article_create.html')
