@@ -57,7 +57,33 @@
 			box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 			margin: 0 auto 0 auto;
 		}
+		.loader {
+  display: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
 
+.loading {
+  border: 2px solid #ccc;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 	</style>
 
@@ -76,6 +102,10 @@
 	<br>
 	<form class="site-form  card " action="{% url 'accounts:login' %}" method="post">
 		<h1 style="text-align: center; color: white; background-color: black; ">Login  </h1>
+		<div class="loader">
+  <div class="loading">
+  </div>
+</div>
 		<br>
 		{% csrf_token %}
 		{{form}}
@@ -84,7 +114,7 @@
 		{% endif %}
 		<div class="login-button">
 			<br>
-		<input  type="submit" value="Login">
+		<input onclick="spinner()" type="submit" value="Login">
 		<br><br>
 	</div>
 	</form>
@@ -116,6 +146,13 @@ var particleCanvas = new ParticleNetwork(canvasDiv, options);
 	function home(){
 		window.location.href="/";
 	}
+
+	 function spinner() {
+        document.getElementsByClassName("loader")[0].style.display = "block";
+        setTimeout(() => {
+            document.getElementsByClassName("loader")[0].style.display = "none";
+        }, 1000);
+    }
 	</script>
 
 </body>

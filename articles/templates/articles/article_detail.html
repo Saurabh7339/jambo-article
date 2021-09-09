@@ -104,6 +104,34 @@
 			max-width: 100%;
 			height: auto;
 		}
+			.loader {
+  display: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  border: 2px solid #ccc;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
 	</style>
 
@@ -126,8 +154,12 @@
 	<ul class="list-group list-group-flush">
 	<li class="list-group-item">
 	<h3 style="color: green;">{{article.title}}</h3> </li>
+		<div class="loader">
+  <div class="loading">
+  </div>
+</div>
 	<li class="list-group-item">
-	<h4>{{article.body}}</h4>
+	<h4 style="word-wrap: break-word;">{{article.body}}</h4>
 </li>
 	<li class="list-group-item">
 	<p class="smalll">Created on : {{article.date}}</p>
@@ -138,8 +170,8 @@
 </li>
 
 </ul>
-	<button class="= btn hahah"><a href="{% url 'articles:delete' slug=article.slug %}" >Delete</a></button>
-	<button class="= btn update"><a href="{% url 'articles:update' slug=article.slug %}" >Update</a></button>
+	<button onclick="spinner()" class="= btn hahah"><a href="{% url 'articles:delete' slug=article.slug %}" >Delete</a></button>
+	<button onclick="spinner()" class="= btn update"><a href="{% url 'articles:update' slug=article.slug %}" >Update</a></button>
 	<p><strong>Note : </strong> <em> Only the author who created this article can delete it . </em></p>
 	<br><br>
 	</div>
@@ -168,6 +200,12 @@ var particleCanvas = new ParticleNetwork(canvasDiv, options);
 	function home(){
 		window.location.href="/";
 	}
+	function spinner() {
+        document.getElementsByClassName("loader")[0].style.display = "block";
+        setTimeout(() => {
+            document.getElementsByClassName("loader")[0].style.display = "none";
+        }, 1000);
+    }
 	</script>
 
 

@@ -86,6 +86,35 @@
 			width: 50%;
 			margin: 0 auto 0 auto;
 		}
+			.loader {
+  display: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.loading {
+  border: 2px solid #ccc;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 
 	</style>
 	<div id="particle-canvas"></div>
@@ -107,6 +136,10 @@
 	<form action="{% url 'articles:update' slug=article.slug %}" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
   <div class="form-group">
+  	<div class="loader">
+  <div class="loading">
+  </div>
+</div>
     <label for="exampleInputEmail1">Title</label>
     <input type="text" class="form-control" name="title" id="exampleInputEmail1" value="{{article.title}}" >
   </div>
@@ -119,7 +152,7 @@
     <input type="text" name="slug" class="form-control" id="exampleInputPassword1" value="{{article.slug}}">
   </div>
 <br>
-  <button type="submit" class="btn btn-primary">Submit</button><hr>
+  <button onclick="spinner()" type="submit" class="btn btn-primary">Submit</button><hr>
   <br>
 
 </form>
@@ -152,6 +185,12 @@ var particleCanvas = new ParticleNetwork(canvasDiv, options);
 	function create(){
 		window.location.href="/articles/create";
 	}
+	function spinner() {
+        document.getElementsByClassName("loader")[0].style.display = "block";
+        setTimeout(() => {
+            document.getElementsByClassName("loader")[0].style.display = "none";
+        }, 1000);
+    }
 	</script>
 
 </body>
