@@ -1,0 +1,66 @@
+
+body{
+	padding: 2%;
+
+}
+
+h1 {
+	text-align: center;
+	position: relative;
+	margin-top: 5%;
+	color: black;
+}
+
+.articles {
+	position: relative;
+	margin-top: 5%;
+
+}
+.card {
+	position: relative;
+	display: inline-block;
+	background-color: white;
+	width: 20%;
+	height:25%;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	
+}
+
+.article {
+	text-align: center;
+}
+.card:hover {
+    filter: blur(0px);
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.btnn {
+	position: relative;
+	display: inline-block;
+	margin-left: 40%;
+
+}
+.samebtn{
+	position: relative;
+	display: inline-block;
+	margin-left: 75%;
+	background-color: black;
+	color: white;
+}
+.samebtn1 {
+	position: relative;
+	display: inline-block;
+	margin-left: 95%;
+	background-color: black;
+	color: white;
+}
+.image{
+	position: relative;
+	display: block;
+	background-size: cover;
+}
+.smalll {
+	position: relative;
+	display: inline-block;
+}
